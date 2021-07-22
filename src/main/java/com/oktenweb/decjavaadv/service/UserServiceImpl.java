@@ -4,6 +4,7 @@ import com.oktenweb.decjavaadv.dao.UserDao;
 import com.oktenweb.decjavaadv.dto.UserDto;
 import com.oktenweb.decjavaadv.entity.User;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -11,11 +12,14 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 @Service
-@RequiredArgsConstructor
 public class UserServiceImpl implements UserDetailsService, UserService {
 
-  private final UserDao userDao;
-  private final PasswordEncoder passwordEncoder;
+  @Autowired
+  private UserDao userDao;
+
+  // Цей бін ми описали на SecurityConfig
+  @Autowired
+  private PasswordEncoder passwordEncoder;
 
   @Override
   public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
