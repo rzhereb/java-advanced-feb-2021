@@ -6,4 +6,5 @@ public interface UserService {
 
   String createUser(UserDto userDto);
 
+  void verifyUser(String code);
 }

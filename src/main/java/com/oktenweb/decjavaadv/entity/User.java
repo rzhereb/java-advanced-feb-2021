@@ -18,15 +18,18 @@ import javax.persistence.Id;
 @Entity
 @NoArgsConstructor
 @Setter
+@Getter
 public class User implements UserDetails {
 
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   private int id;
-
   private String username;
   private String password;
   private String role;
+  private String email;
+  private boolean enabled;
+  private String verificationCode;
 
   @Override
   public Collection<? extends GrantedAuthority> getAuthorities() {
@@ -60,6 +63,6 @@ public class User implements UserDetails {
 
   @Override
   public boolean isEnabled() {
-    return true;
+    return enabled;
   }
 }
