@@ -16,6 +16,7 @@ import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.PageRequest;
+import org.springframework.mock.web.MockMultipartFile;
 import org.springframework.web.server.ResponseStatusException;
 
 import java.util.ArrayList;
@@ -69,7 +70,8 @@ public class MovieServiceTest {
   public void givenTitleStartingWithSmallLetterWhenSavingMovieThenThrowException() {
     MovieCreateDto movie = new MovieCreateDto();
     movie.setTitle("so");
-    Assertions.assertThrows(ResponseStatusException.class, () -> movieService.createMovie(movie));
+    Assertions.assertThrows(ResponseStatusException.class, () ->
+        movieService.createMovie(movie, new MockMultipartFile("1", new byte[10])));
   }
 
   private Director generateDirector(int id) {
